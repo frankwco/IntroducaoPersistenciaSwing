@@ -24,10 +24,10 @@ public class FormularioCadastroCliente extends javax.swing.JDialog {
     public FormularioCadastroCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        //CENTRALIZA O DIALOG: VERTICAL E HORIZONTAL
+
         setLocationRelativeTo(null);
         cliente = new Cliente();
-        dao=new DAOCliente();
+        dao = new DAOCliente();
     }
 
     /**
@@ -111,15 +111,39 @@ public class FormularioCadastroCliente extends javax.swing.JDialog {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+    private boolean validarCampos() {
+        String mensagem = "";
+        boolean retorno = true;
+        if (textNome.getText().trim().equals("")) {
+            mensagem = "Preencha o Nome\n";
+            retorno = false;
+        }
+        if (textIdade.getText().trim().equals("")) {
+            mensagem += "Preencha a Idade\n";
+            retorno = false;
+        }
+        if (!textIdade.getText().trim().matches("[0-9]+")) {
+            mensagem += "Preencha a idade somente com números";
+            retorno = false;
+        }
+        if (retorno == false) {
+            JOptionPane.showMessageDialog(this, mensagem);
+        }
+
+        return retorno;
+    }
+
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        cliente.setNome(textNome.getText());
-        cliente.setIdade(Integer.parseInt(textIdade.getText()));
-        dao.salvar(cliente);
-        JOptionPane.showMessageDialog(this, "Cadastrado com Sucesso!!");
-        //Fechar a janela
-        dispose();
+        if (validarCampos()) {
+            cliente.setNome(textNome.getText().trim());
+            cliente.setIdade(Integer.parseInt(textIdade.getText().trim()));
+            dao.salvar(cliente);
+            JOptionPane.showMessageDialog(this, "Cadastrado com Sucesso!!");
+            dispose();
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

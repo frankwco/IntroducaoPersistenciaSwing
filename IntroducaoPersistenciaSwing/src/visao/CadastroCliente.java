@@ -12,7 +12,9 @@ import visao.tablemodel.TMCliente;
  * @author Aluno
  */
 public class CadastroCliente extends javax.swing.JFrame {
+
     TMCliente tmCliente;
+
     /**
      * Creates new form CadastroCliente
      */
@@ -20,8 +22,9 @@ public class CadastroCliente extends javax.swing.JFrame {
         initComponents();
         preencherTabela();
     }
-    private void preencherTabela(){
-        tmCliente=new TMCliente();
+
+    private void preencherTabela() {
+        tmCliente = new TMCliente();
         tabelaCliente.setModel(tmCliente);
         tabelaCliente.updateUI();
     }
